@@ -101,7 +101,6 @@ export default withAuth(function CreateArticlePage() {
         category_id: number;
         user_id?: string;
         user_email?: string;
-        user_avatar?: string | null;
         image_path?: string;
       } = {
         title: formData.title,
@@ -109,7 +108,6 @@ export default withAuth(function CreateArticlePage() {
         category_id: formData.category_id,
         user_id: user?.id,
         user_email: user?.email,
-        user_avatar: user?.user_metadata?.avatar_url || null,
       };
 
       if (imagePath) {
