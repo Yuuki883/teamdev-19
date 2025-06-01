@@ -170,7 +170,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({
             required
           >
             <option value="">Select category</option>
-            {CATEGORIES.map((category) => (
+            {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
               </option>

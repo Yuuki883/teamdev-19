@@ -11,7 +11,9 @@ import Header from "@/components/Header";
 
 export default withAuth(function CreateArticlePage() {
   const router = useRouter();
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<
+    Array<{ id: number; name: string }>
+  >([]);
 
   // カテゴリ一覧を取得
   useEffect(() => {
@@ -65,14 +67,9 @@ export default withAuth(function CreateArticlePage() {
       console.log("アップロード後のファイル一覧:", listData);
     }
 
-    const { data: publicUrlData, error: publicUrlError } = supabase.storage
+    const { data: publicUrlData } = supabase.storage
       .from("my-bucket")
       .getPublicUrl(filePath);
-
-    if (publicUrlError) {
-      console.error("パブリックURL取得エラー:", publicUrlError);
-      return null;
-    }
 
     console.log("getPublicUrlの戻り値:", publicUrlData);
 

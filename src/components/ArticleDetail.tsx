@@ -22,13 +22,12 @@ type PostWithUser = {
   image_path: string | null;
   created_at: string;
   updated_at: string;
-  category: Category; 
+  category: Category;
   user_id: number;
   user: User;
 };
 
 export default function ArticleDetail({ post }: { post: PostWithUser }) {
-  
   return (
     <>
       <Header />
@@ -38,7 +37,7 @@ export default function ArticleDetail({ post }: { post: PostWithUser }) {
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">{post.title}</h1>
             <div className="flex items-center">
-             {post.user?.image_path ? (
+              {post.user?.image_path ? (
                 <Image
                   src={post.user.image_path}
                   alt="ユーザーアイコン"
@@ -49,10 +48,10 @@ export default function ArticleDetail({ post }: { post: PostWithUser }) {
               ) : (
                 <div className="w-10 h-10 rounded-full bg-gray-300" />
               )}
-              </div>
-            </div>  
+            </div>
+          </div>
 
-           <div className="mb-6">
+          <div className="mb-6">
             {post.image_path ? (
               <Image
                 src={post.image_path}
@@ -62,22 +61,21 @@ export default function ArticleDetail({ post }: { post: PostWithUser }) {
                 className="rounded object-cover w-full h-full"
               />
             ) : (
-               <div className="w-full h-64 bg-gray-300"></div>
+              <div className="w-full h-64 bg-gray-300"></div>
             )}
           </div>
 
           <div className="text-base leading-relaxed">
-        <div className="flex gap-4 text-sm text-gray-600  mb-3">
-            <span className="inline-block px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">
-              カテゴリ: {post.category?.name}
-            </span>
-            <span className="text-xs">
-              投稿日時: {new Date(post.created_at).toLocaleString()}
-            </span>
-        </div>
+            <div className="flex gap-4 text-sm text-gray-600  mb-3">
+              <span className="inline-block px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">
+                カテゴリ: {post.category?.name}
+              </span>
+              <span className="text-xs">
+                投稿日時: {new Date(post.created_at).toLocaleString()}
+              </span>
+            </div>
             <p>{post.content}</p>
           </div>
-          <CommentSection />
         </div>
         <CommentSection postId={post.id} />
       </div>

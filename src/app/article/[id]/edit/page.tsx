@@ -15,8 +15,33 @@ export default withAuth(function EditArticlePage() {
   const { user } = useAuth();
   const { id: articleId } = useParams() as { id: string };
   const [article, setArticle] = useState<ArticleFormData | null>(null);
+  const [categories, setCategories] = useState<
+    Array<{ id: number; name: string }>
+  >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // カテゴリデータの取得
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const { data, error } = await supabase
+          .from("categories")
+          .select("id, name")
+          .order("id");
+
+        if (error) {
+          throw error;
+        }
+
+        setCategories(data || []);
+      } catch (err) {
+        console.error("カテゴリデータの取得エラー:", err);
+      }
+    }
+
+    fetchCategories();
+  }, []);
 
   // 記事データの取得
   useEffect(() => {
@@ -127,6 +152,7 @@ export default withAuth(function EditArticlePage() {
           <ArticleForm
             onSubmit={handleSubmit}
             initialData={article}
+            categories={categories}
             deleteButton={
               <ArticleDeleteButton
                 articleId={articleId}
