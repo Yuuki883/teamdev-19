@@ -100,14 +100,12 @@ export default withAuth(function CreateArticlePage() {
         content: string;
         category_id: number;
         user_id?: string;
-        user_email?: string;
         image_path?: string;
       } = {
         title: formData.title,
         content: formData.content,
         category_id: formData.category_id,
         user_id: user?.id,
-        user_email: user?.email,
       };
 
       if (imagePath) {
